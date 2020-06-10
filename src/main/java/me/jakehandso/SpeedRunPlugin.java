@@ -1,4 +1,4 @@
-package com.example;
+package me.jakehandso;
 
 import com.google.inject.Provides;
 import javax.inject.Inject;
@@ -14,40 +14,32 @@ import net.runelite.client.plugins.PluginDescriptor;
 
 @Slf4j
 @PluginDescriptor(
-	name = "Example"
+	name = "SpeedRun"
 )
-public class ExamplePlugin extends Plugin
+public class SpeedRunPlugin extends Plugin
 {
 	@Inject
 	private Client client;
 
 	@Inject
-	private ExampleConfig config;
+	private SpeedRunConfig config;
 
 	@Override
 	protected void startUp() throws Exception
 	{
-		log.info("Example started!");
+		log.info("SpeedRunPlugin started!");
 	}
 
 	@Override
 	protected void shutDown() throws Exception
 	{
-		log.info("Example stopped!");
+		log.info("SpeedRunPlugin stopped!");
 	}
 
-	@Subscribe
-	public void onGameStateChanged(GameStateChanged gameStateChanged)
-	{
-		if (gameStateChanged.getGameState() == GameState.LOGGED_IN)
-		{
-			client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "Example says " + config.greeting(), null);
-		}
-	}
 
 	@Provides
-	ExampleConfig provideConfig(ConfigManager configManager)
+	SpeedRunConfig provideConfig(ConfigManager configManager)
 	{
-		return configManager.getConfig(ExampleConfig.class);
+		return configManager.getConfig(SpeedRunConfig.class);
 	}
 }
